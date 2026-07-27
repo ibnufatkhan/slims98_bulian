@@ -97,46 +97,89 @@
     }
   }
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    setMessage('');
+  function tokenField() {
+    return form.querySelector('#lr-csrf') || form.querySelector('input[name="csrf_token"]');
+  }
 
-    var formData = new FormData(form);
-    submitBtn.disabled = true;
-    submitBtn.textContent = cfg.labels.sending || 'Mengirim...';
+  function applyToken(token) {
+    var field = tokenField();
+    if (field && token) field.value = token;
+  }
 
-    fetch(cfg.submitUrl, {
+  function post() {
+    return fetch(cfg.submitUrl, {
       method: 'POST',
-      body: formData,
+      body: new FormData(form),
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
       }
+    }).then(function (response) {
+      return response.json().catch(function () {
+        return null;
+      });
+    });
+  }
+
+  function refreshToken() {
+    var url = cfg.submitUrl + (cfg.submitUrl.indexOf('?') === -1 ? '?' : '&') + 'action=token';
+    return fetch(url, {
+      credentials: 'same-origin',
+      headers: { 'Accept': 'application/json' }
     })
       .then(function (response) {
-        return response.json().then(function (data) {
-          return { ok: response.ok, data: data };
-        });
+        return response.json();
       })
-      .then(function (result) {
-        if (!result.data || !result.data.status) {
-          throw new Error((result.data && result.data.message) || cfg.labels.error);
-        }
+      .then(function (data) {
+        if (data && data.token) applyToken(data.token);
+      })
+      .catch(function () {});
+  }
 
-        setMessage(result.data.message || '', 'success');
-        form.reset();
-        var defaultRating = form.querySelector('#lr-rate-5');
-        if (defaultRating) defaultRating.checked = true;
-        renderStats(result.data.stats);
-        renderList(result.data.items);
+  function handleResult(data) {
+    if (!data || !data.status) {
+      if (data && data.token) applyToken(data.token);
+      throw new Error((data && data.message) || cfg.labels.error);
+    }
+
+    if (data.token) applyToken(data.token);
+    setMessage(data.message || '', 'success');
+    form.reset();
+    if (data.token) applyToken(data.token);
+    var defaultRating = form.querySelector('#lr-rate-5');
+    if (defaultRating) defaultRating.checked = true;
+    renderStats(data.stats);
+    renderList(data.items);
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    setMessage('');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = cfg.labels.sending || 'Mengirim...';
+
+    post()
+      .then(function (data) {
+        // Token bisa kedaluwarsa (mis. sesi diperbarui); pakai token baru lalu coba sekali lagi
+        if (data && !data.status && data.code === 'invalid_token' && data.token) {
+          applyToken(data.token);
+          return post();
+        }
+        return data;
       })
+      .then(handleResult)
       .catch(function (error) {
         setMessage(error.message || cfg.labels.error, 'error');
+        refreshToken();
       })
       .finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = cfg.labels.send || 'Kirim Ulasan';
       });
   });
+
+  // Selaraskan token saat widget dimuat
+  refreshToken();
 })();

@@ -19,7 +19,7 @@ try {
 }
 
 $embed = !empty($landing_rating_embed_mode);
-$csrf = $_SESSION['csrf_token'] ?? '';
+$csrf = landing_rating_token();
 $submitUrl = SWB . 'index.php?p=landing_rating';
 $avg = $stats['average'];
 $total = $stats['total'];
@@ -29,7 +29,7 @@ $assetBase = SWB . 'plugins/landing_rating/assets';
 
 if (!$embed && !defined('LANDING_RATING_CSS_LOADED')) {
     define('LANDING_RATING_CSS_LOADED', true);
-    echo '<link rel="stylesheet" href="' . $assetBase . '/landing_rating.css?v=1.0.2">';
+    echo '<link rel="stylesheet" href="' . $assetBase . '/landing_rating.css?v=1.0.3">';
 }
 ?>
 <section class="lr-section" id="landing-rating" aria-labelledby="lr-heading">
@@ -127,5 +127,5 @@ window.LANDING_RATING = {
     }
 };
 </script>
-<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.2"></script>
+<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.3"></script>
 <?php endif; ?>
