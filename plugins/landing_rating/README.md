@@ -51,3 +51,14 @@ plugins/
 ## Endpoint
 
 - Submit/list: `index.php?p=landing_rating`
+- Ambil token: `index.php?p=landing_rating&action=token`
+
+## Tidak menyentuh file inti
+
+Plugin ini **tidak** mengubah file di luar `plugins/landing_rating/`.
+Termasuk `template/default/parts/footer.php` dan
+`template/lightweight/partials/footer.php` yang tetap asli, sehingga aman
+saat SLiMS diperbarui dan tidak bentrok dengan plugin lain.
+
+Bagi pembuat template kustom, hook `opac_footer` tetap tersedia bila ingin
+menempatkan widget secara manual.
