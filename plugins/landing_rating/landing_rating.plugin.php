@@ -1,5 +1,7 @@
 <?php
 /**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ *
  * Plugin Name: Landing Page Rating
  * Plugin URI: https://github.com/slims/slims9_bulian
  * Description: Fitur rating di footer landing page. Pengunjung dapat mengirim nama, komentar, dan bintang. Admin dapat menyembunyikan atau menghapus rating.

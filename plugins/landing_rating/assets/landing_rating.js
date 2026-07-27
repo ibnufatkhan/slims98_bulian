@@ -1,3 +1,6 @@
+/**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ */
 (function () {
   'use strict';
 
