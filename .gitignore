@@ -30,7 +30,11 @@ plugins/*
 !plugins/star_rating/**
 
 template/*
+!template/default/
+!template/default/parts/
 !template/default/parts/footer.php
+!template/lightweight/
+!template/lightweight/partials/
 !template/lightweight/partials/footer.php
 
 # Windows image file caches
