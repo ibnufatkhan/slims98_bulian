@@ -1,7 +1,9 @@
 <?php
 /**
  * Footer widget: Landing Page Rating
- * Ditampilkan hanya di landing page via hook opac_footer
+ *
+ * Variabel opsional:
+ * - $landing_rating_embed_mode (bool): hanya output HTML section (tanpa link/script)
  */
 
 defined('INDEX_AUTH') or die('Direct access not allowed!');
@@ -16,6 +18,7 @@ try {
     return;
 }
 
+$embed = !empty($landing_rating_embed_mode);
 $csrf = $_SESSION['csrf_token'] ?? '';
 $submitUrl = SWB . 'index.php?p=landing_rating';
 $avg = $stats['average'];
@@ -23,9 +26,12 @@ $total = $stats['total'];
 $distribution = $stats['distribution'];
 $maxDist = max(1, max($distribution));
 $assetBase = SWB . 'plugins/landing_rating/assets';
-?>
-<link rel="stylesheet" href="<?= $assetBase ?>/landing_rating.css?v=1.0.0">
 
+if (!$embed && !defined('LANDING_RATING_CSS_LOADED')) {
+    define('LANDING_RATING_CSS_LOADED', true);
+    echo '<link rel="stylesheet" href="' . $assetBase . '/landing_rating.css?v=1.0.1">';
+}
+?>
 <section class="lr-section" id="landing-rating" aria-labelledby="lr-heading">
     <div class="lr-container">
         <div class="lr-header">
@@ -62,7 +68,7 @@ $assetBase = SWB . 'plugins/landing_rating/assets';
             </div>
 
             <form class="lr-form" id="lr-form" autocomplete="off">
-                <input type="hidden" name="csrf_token" value="<?= landing_rating_e($csrf); ?>">
+                <input type="hidden" name="csrf_token" id="lr-csrf" value="<?= landing_rating_e($csrf); ?>">
                 <input type="hidden" name="action" value="submit">
 
                 <div class="lr-form-title"><?= __('Tulis Ulasan'); ?></div>
@@ -108,7 +114,7 @@ $assetBase = SWB . 'plugins/landing_rating/assets';
         </div>
     </div>
 </section>
-
+<?php if (!$embed): ?>
 <script>
 window.LANDING_RATING = {
     submitUrl: <?= json_encode($submitUrl, JSON_UNESCAPED_SLASHES); ?>,
@@ -121,4 +127,5 @@ window.LANDING_RATING = {
     }
 };
 </script>
-<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.0"></script>
+<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.1"></script>
+<?php endif; ?>
