@@ -1,3 +1,8 @@
+<?php
+// Plugin hook: landing page footer widgets (e.g. rating)
+\SLiMS\Plugins::run('opac_footer');
+?>
+
 <footer class="s-footer">
   <?php
   // Promoted titles - Only show at the homepage
