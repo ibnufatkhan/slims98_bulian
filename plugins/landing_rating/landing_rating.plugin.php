@@ -3,7 +3,7 @@
  * Plugin Name: Landing Page Rating
  * Plugin URI: https://github.com/slims/slims9_bulian
  * Description: Fitur rating di footer landing page. Pengunjung dapat mengirim nama, komentar, dan bintang. Admin dapat menyembunyikan atau menghapus rating.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: SLiMS Community
  * Author URI: https://slims.web.id
  */
@@ -76,7 +76,7 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
 
     // Catatan: metadata OPAC ditimpa oleh Opac::orWelcome() di halaman beranda,
     // jadi stylesheet disisipkan lewat $opac->js yang dicetak di dalam <head>.
-    $cssUrl = SWB . 'plugins/landing_rating/assets/landing_rating.css?v=1.0.2';
+    $cssUrl = SWB . 'plugins/landing_rating/assets/landing_rating.css?v=1.0.3';
     if (!defined('LANDING_RATING_CSS_LOADED')) {
         define('LANDING_RATING_CSS_LOADED', true);
         $opac->js = ($opac->js ?? '') . '<link rel="stylesheet" href="' . $cssUrl . '">';
@@ -84,7 +84,7 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
 
     $config = [
         'submitUrl' => SWB . 'index.php?p=landing_rating',
-        'scriptUrl' => SWB . 'plugins/landing_rating/assets/landing_rating.js?v=1.0.2',
+        'scriptUrl' => SWB . 'plugins/landing_rating/assets/landing_rating.js?v=1.0.3',
         'cssUrl' => $cssUrl,
         'html' => $html,
         'labels' => [
@@ -105,11 +105,6 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
 <script>
 (function () {
   var cfg = {$json};
-  function syncCsrf(root) {
-    var pageToken = document.querySelector('input[name="csrf_token"]');
-    var formToken = root.querySelector('#lr-csrf, input[name="csrf_token"]');
-    if (pageToken && formToken && pageToken.value) formToken.value = pageToken.value;
-  }
   function ensureCss() {
     if (!cfg.cssUrl) return;
     var base = cfg.cssUrl.split('?')[0];
@@ -124,10 +119,7 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
   }
   function boot() {
     ensureCss();
-    if (document.getElementById('landing-rating')) {
-      syncCsrf(document.getElementById('landing-rating'));
-      return;
-    }
+    if (document.getElementById('landing-rating')) return;
     var wrap = document.createElement('div');
     wrap.innerHTML = cfg.html;
     var footer = document.querySelector('footer.s-footer, footer.py-4, footer');
@@ -136,8 +128,6 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
       if (footer && footer.parentNode) footer.parentNode.insertBefore(node, footer);
       else document.body.appendChild(node);
     });
-    var widget = document.getElementById('landing-rating');
-    if (widget) syncCsrf(widget);
     window.LANDING_RATING = {
       submitUrl: cfg.submitUrl,
       labels: cfg.labels

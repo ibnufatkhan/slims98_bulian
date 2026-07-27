@@ -22,9 +22,17 @@ header('X-Content-Type-Options: nosniff');
 $action = $_POST['action'] ?? $_GET['action'] ?? 'list';
 
 try {
+    if ($action === 'token') {
+        exit(Json::stringify([
+            'status' => true,
+            'token' => landing_rating_token(),
+        ])->withHeader());
+    }
+
     if ($action === 'list') {
         exit(Json::stringify([
             'status' => true,
+            'token' => landing_rating_token(),
             'stats' => landing_rating_get_stats(),
             'items' => landing_rating_get_visible(30),
         ])->withHeader());
@@ -35,10 +43,14 @@ try {
             throw new RuntimeException(__('Metode tidak diizinkan'));
         }
 
-        // Simple CSRF check (OPAC session token)
-        $csrf = $_POST['csrf_token'] ?? '';
-        if (empty($_SESSION['csrf_token']) || !hash_equals((string) $_SESSION['csrf_token'], (string) $csrf)) {
-            throw new RuntimeException(__('Token keamanan tidak valid. Muat ulang halaman.'));
+        if (!landing_rating_token_valid($_POST['csrf_token'] ?? null)) {
+            http_response_code(400);
+            exit(Json::stringify([
+                'status' => false,
+                'code' => 'invalid_token',
+                'message' => __('Token keamanan tidak valid. Muat ulang halaman.'),
+                'token' => landing_rating_token(),
+            ])->withHeader());
         }
 
         $name = trim((string) utility::filterData('visitor_name', 'post', true, true, true));
@@ -91,6 +103,7 @@ try {
         exit(Json::stringify([
             'status' => true,
             'message' => __('Terima kasih! Ulasan Anda berhasil dikirim.'),
+            'token' => landing_rating_token(),
             'stats' => landing_rating_get_stats(),
             'items' => landing_rating_get_visible(30),
         ])->withHeader());
@@ -102,5 +115,6 @@ try {
     exit(Json::stringify([
         'status' => false,
         'message' => $e->getMessage(),
+        'token' => landing_rating_token(),
     ])->withHeader());
 }

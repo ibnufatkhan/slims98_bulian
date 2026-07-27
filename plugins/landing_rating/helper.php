@@ -8,6 +8,46 @@ defined('INDEX_AUTH') or die('Direct access not allowed!');
 use SLiMS\DB;
 
 /**
+ * Token khusus plugin.
+ *
+ * SLiMS membuat ulang $_SESSION['csrf_token'] pada setiap render halaman,
+ * dan itu terjadi setelah widget dibentuk. Token sendiri yang stabil per
+ * sesi membuat form tetap valid saat dikirim.
+ *
+ * @return string
+ */
+function landing_rating_token(): string
+{
+    if (empty($_SESSION['landing_rating_token'])) {
+        $_SESSION['landing_rating_token'] = bin2hex(random_bytes(32));
+    }
+
+    return (string) $_SESSION['landing_rating_token'];
+}
+
+/**
+ * Validasi token yang dikirim pengunjung.
+ *
+ * @param string|null $token
+ * @return bool
+ */
+function landing_rating_token_valid(?string $token): bool
+{
+    $token = (string) $token;
+    if ($token === '') {
+        return false;
+    }
+
+    foreach ([$_SESSION['landing_rating_token'] ?? '', $_SESSION['csrf_token'] ?? ''] as $known) {
+        if ($known !== '' && hash_equals((string) $known, $token)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Fetch visible ratings for OPAC display.
  *
  * @param int $limit
