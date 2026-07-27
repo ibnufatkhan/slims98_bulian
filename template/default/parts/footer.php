@@ -8,11 +8,6 @@
 ?>
 
 
-<?php
-// Plugin hook: landing page footer widgets (e.g. rating)
-\SLiMS\Plugins::run('opac_footer');
-?>
-
 <footer class="py-4 bg-grey-darkest text-grey-lighter">
     <div class="container">
         <div class="row py-4">

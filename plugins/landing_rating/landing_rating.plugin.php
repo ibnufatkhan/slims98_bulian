@@ -148,9 +148,12 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
 HTML;
 });
 
-// Opsional: jika template memanggil Plugins::run('opac_footer')
+/**
+ * Opsional, tidak dipakai template bawaan SLiMS.
+ *
+ * Tersedia bagi template kustom yang memanggil Plugins::run('opac_footer')
+ * secara manual. landing_rating_render_once() menjaga widget tidak dobel.
+ */
 $plugin->register('opac_footer', function () {
-    // Hindari dobel jika sudah di-inject via JS
-    echo '<script>window.__LR_TEMPLATE_HOOK=1;</script>';
     landing_rating_render_once();
 });
