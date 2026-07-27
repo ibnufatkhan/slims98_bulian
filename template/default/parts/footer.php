@@ -8,6 +8,11 @@
 ?>
 
 
+<?php
+// Plugin hook: render content above OPAC footer (e.g. Star Rating)
+\SLiMS\Plugins::getInstance()->execute('opac_footer');
+?>
+
 <footer class="py-4 bg-grey-darkest text-grey-lighter">
     <div class="container">
         <div class="row py-4">

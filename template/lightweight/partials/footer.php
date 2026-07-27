@@ -1,3 +1,8 @@
+<?php
+// Plugin hook: render content above OPAC footer (e.g. Star Rating)
+\SLiMS\Plugins::getInstance()->execute('opac_footer');
+?>
+
 <footer class="s-footer">
   <?php
   // Promoted titles - Only show at the homepage

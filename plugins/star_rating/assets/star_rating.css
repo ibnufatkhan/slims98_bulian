@@ -1,0 +1,261 @@
+/**
+ * Star Rating – public OPAC styles
+ */
+
+.sr-section {
+  background: linear-gradient(180deg, #f7f3ec 0%, #efe6d8 100%);
+  border-top: 1px solid rgba(90, 62, 32, 0.12);
+  color: #2f2418;
+  padding: 3rem 0 2.5rem;
+}
+
+.sr-container {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.sr-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  color: #1f160e;
+}
+
+.sr-subtitle {
+  margin: 0 0 1.75rem;
+  color: #6a5642;
+  font-size: 0.95rem;
+}
+
+.sr-summary {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(90, 62, 32, 0.12);
+}
+
+.sr-average-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7a654f;
+  margin-bottom: 0.5rem;
+}
+
+.sr-stars {
+  color: #e08a1e;
+  letter-spacing: 0.08em;
+}
+
+.sr-stars-lg {
+  font-size: 1.6rem;
+}
+
+.sr-stars-md {
+  font-size: 1.1rem;
+}
+
+.sr-stars-sm {
+  font-size: 0.95rem;
+}
+
+.sr-average-text {
+  margin-top: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.sr-total-text {
+  margin-top: 0.25rem;
+  color: #6a5642;
+  font-size: 0.9rem;
+}
+
+.sr-breakdown-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr 2rem;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.sr-breakdown-bar {
+  height: 0.55rem;
+  background: rgba(90, 62, 32, 0.12);
+  overflow: hidden;
+}
+
+.sr-breakdown-bar > span {
+  display: block;
+  height: 100%;
+  background: #e08a1e;
+}
+
+.sr-breakdown-count {
+  text-align: right;
+  color: #6a5642;
+}
+
+.sr-form-wrap,
+.sr-list-wrap {
+  margin-top: 1.5rem;
+}
+
+.sr-form-title,
+.sr-list-title {
+  font-size: 1.15rem;
+  margin: 0 0 0.85rem;
+  color: #1f160e;
+}
+
+.sr-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1rem;
+}
+
+.sr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sr-field-full {
+  grid-column: 1 / -1;
+}
+
+.sr-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a3828;
+}
+
+.sr-field input,
+.sr-field textarea {
+  border: 1px solid rgba(90, 62, 32, 0.25);
+  background: #fffdf9;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: #2f2418;
+  border-radius: 0;
+}
+
+.sr-field input:focus,
+.sr-field textarea:focus {
+  outline: 2px solid rgba(224, 138, 30, 0.45);
+  border-color: #e08a1e;
+}
+
+.sr-rating-input {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.sr-rate-btn {
+  border: 0;
+  background: transparent;
+  color: #c9b8a4;
+  font-size: 1.4rem;
+  padding: 0.15rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.sr-rate-btn.is-active,
+.sr-rate-btn.is-hover {
+  color: #e08a1e;
+}
+
+.sr-submit {
+  margin-top: 1rem;
+  border: 0;
+  background: #2f6f4e;
+  color: #fff;
+  padding: 0.7rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sr-submit:hover {
+  background: #255a3f;
+}
+
+.sr-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.sr-alert {
+  margin-bottom: 0.85rem;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.9rem;
+}
+
+.sr-alert.is-success {
+  background: #e7f5ee;
+  color: #1f5a3a;
+}
+
+.sr-alert.is-error {
+  background: #fbeaea;
+  color: #8a1f1f;
+}
+
+.sr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sr-item {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(90, 62, 32, 0.12);
+}
+
+.sr-item:last-child {
+  border-bottom: 1px solid rgba(90, 62, 32, 0.12);
+}
+
+.sr-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.35rem;
+}
+
+.sr-item-name {
+  color: #1f160e;
+}
+
+.sr-item-comment {
+  margin: 0 0 0.4rem;
+  line-height: 1.5;
+  color: #3d2f22;
+}
+
+.sr-item-meta {
+  font-size: 0.8rem;
+  color: #7a654f;
+}
+
+.sr-empty {
+  color: #6a5642;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .sr-summary,
+  .sr-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sr-breakdown-row {
+    grid-template-columns: 4.8rem 1fr 1.6rem;
+  }
+}

@@ -26,8 +26,12 @@ slims8_akasia.sublime-workspace
 
 plugins/*
 !plugins/read_counter/
+!plugins/star_rating/
+!plugins/star_rating/**
 
 template/*
+!template/default/parts/footer.php
+!template/lightweight/partials/footer.php
 
 # Windows image file caches
 Thumbs.db
