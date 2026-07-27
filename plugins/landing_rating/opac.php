@@ -1,5 +1,7 @@
 <?php
 /**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ *
  * OPAC endpoint for Landing Page Rating
  * URL: index.php?p=landing_rating
  */

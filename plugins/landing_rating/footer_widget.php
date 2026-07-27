@@ -1,5 +1,7 @@
 <?php
 /**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ *
  * Footer widget: Landing Page Rating
  *
  * Variabel opsional:

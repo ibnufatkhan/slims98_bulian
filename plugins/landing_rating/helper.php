@@ -1,5 +1,7 @@
 <?php
 /**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ *
  * Shared helpers for Landing Page Rating plugin
  */
 
