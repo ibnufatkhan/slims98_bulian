@@ -26,6 +26,7 @@ slims8_akasia.sublime-workspace
 
 plugins/*
 !plugins/read_counter/
+!plugins/landing_rating/
 
 template/*
 
