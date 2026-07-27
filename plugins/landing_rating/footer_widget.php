@@ -29,7 +29,7 @@ $assetBase = SWB . 'plugins/landing_rating/assets';
 
 if (!$embed && !defined('LANDING_RATING_CSS_LOADED')) {
     define('LANDING_RATING_CSS_LOADED', true);
-    echo '<link rel="stylesheet" href="' . $assetBase . '/landing_rating.css?v=1.0.1">';
+    echo '<link rel="stylesheet" href="' . $assetBase . '/landing_rating.css?v=1.0.2">';
 }
 ?>
 <section class="lr-section" id="landing-rating" aria-labelledby="lr-heading">
@@ -42,11 +42,11 @@ if (!$embed && !defined('LANDING_RATING_CSS_LOADED')) {
         <div class="lr-summary">
             <div class="lr-average">
                 <div class="lr-average-label"><?= __('Peringkat Rata-Rata'); ?></div>
+                <div id="lr-avg-stars"><?= landing_rating_stars_html($avg); ?></div>
                 <div class="lr-average-value">
                     <span class="lr-average-number" id="lr-avg-number"><?= number_format($avg, 1); ?></span>
-                    <span class="lr-average-max">/ 5</span>
+                    <span class="lr-average-max"><?= __('dari 5 bintang'); ?></span>
                 </div>
-                <div id="lr-avg-stars"><?= landing_rating_stars_html($avg); ?></div>
                 <div class="lr-total" id="lr-total-label">
                     <?= sprintf(__('%d ulasan'), $total); ?>
                 </div>
@@ -58,7 +58,7 @@ if (!$embed && !defined('LANDING_RATING_CSS_LOADED')) {
                     $pct = $total > 0 ? round(($count / $maxDist) * 100) : 0;
                 ?>
                 <div class="lr-dist-row" data-star="<?= $star; ?>">
-                    <span class="lr-dist-label"><?= $star; ?> &#9733;</span>
+                    <span class="lr-dist-label"><?= sprintf(__('%d bintang'), $star); ?></span>
                     <div class="lr-dist-bar">
                         <span class="lr-dist-fill" style="width: <?= $pct; ?>%"></span>
                     </div>
@@ -127,5 +127,5 @@ window.LANDING_RATING = {
     }
 };
 </script>
-<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.1"></script>
+<script src="<?= $assetBase ?>/landing_rating.js?v=1.0.2"></script>
 <?php endif; ?>

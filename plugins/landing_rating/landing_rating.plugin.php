@@ -3,7 +3,7 @@
  * Plugin Name: Landing Page Rating
  * Plugin URI: https://github.com/slims/slims9_bulian
  * Description: Fitur rating di footer landing page. Pengunjung dapat mengirim nama, komentar, dan bintang. Admin dapat menyembunyikan atau menghapus rating.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: SLiMS Community
  * Author URI: https://slims.web.id
  */
@@ -74,15 +74,18 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
         return;
     }
 
+    // Catatan: metadata OPAC ditimpa oleh Opac::orWelcome() di halaman beranda,
+    // jadi stylesheet disisipkan lewat $opac->js yang dicetak di dalam <head>.
+    $cssUrl = SWB . 'plugins/landing_rating/assets/landing_rating.css?v=1.0.2';
     if (!defined('LANDING_RATING_CSS_LOADED')) {
         define('LANDING_RATING_CSS_LOADED', true);
-        $css = SWB . 'plugins/landing_rating/assets/landing_rating.css?v=1.0.1';
-        $opac->metadata = ($opac->metadata ?? '') . '<link rel="stylesheet" href="' . $css . '">';
+        $opac->js = ($opac->js ?? '') . '<link rel="stylesheet" href="' . $cssUrl . '">';
     }
 
     $config = [
         'submitUrl' => SWB . 'index.php?p=landing_rating',
-        'scriptUrl' => SWB . 'plugins/landing_rating/assets/landing_rating.js?v=1.0.1',
+        'scriptUrl' => SWB . 'plugins/landing_rating/assets/landing_rating.js?v=1.0.2',
+        'cssUrl' => $cssUrl,
         'html' => $html,
         'labels' => [
             'reviews' => __('%d ulasan'),
@@ -107,7 +110,20 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
     var formToken = root.querySelector('#lr-csrf, input[name="csrf_token"]');
     if (pageToken && formToken && pageToken.value) formToken.value = pageToken.value;
   }
+  function ensureCss() {
+    if (!cfg.cssUrl) return;
+    var base = cfg.cssUrl.split('?')[0];
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if ((links[i].getAttribute('href') || '').indexOf(base) !== -1) return;
+    }
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = cfg.cssUrl;
+    document.head.appendChild(link);
+  }
   function boot() {
+    ensureCss();
     if (document.getElementById('landing-rating')) {
       syncCsrf(document.getElementById('landing-rating'));
       return;

@@ -32,6 +32,7 @@ plugins/
 - Admin dapat **menyembunyikan** atau **menghapus** ulasan
 - Proteksi CSRF + batasan flood (maks. 3 ulasan / IP / jam)
 - **Tidak wajib** mengubah file template (v1.0.1+ inject otomatis)
+- Tema terang agar menyatu dengan halaman OPAC (v1.0.2)
 
 ## Instalasi
 
