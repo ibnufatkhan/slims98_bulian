@@ -7,7 +7,13 @@ use GuzzleHttp\Exception\GuzzleException;
 use RuntimeException;
 
 /**
- * Pengirim notifikasi WhatsApp via Fonnte / Whacenter.
+ * Pengirim notifikasi WhatsApp — API dari Simple-WA-Notif-for-Circulation.
+ *
+ * Menggantikan skrip BSKDNold yang memakai curl mentah ke Whacenter:
+ *   - admin/modules/membership/member_base_lib.inc.php.bak :: sendOverdueNoticeWA()
+ *   - admin/modules/circulation/pop_loan_receipt.php.bak :: sendMessage()
+ *
+ * Provider: fonnte | whacenter (GuzzleHttp, sama seperti Simple-WA-Notif).
  */
 class Notification
 {
@@ -19,13 +25,15 @@ class Notification
     }
 
     /**
-     * Kirim pesan sesuai provider & mode yang dikonfigurasi.
+     * Entry point pengganti sendMessage()/curl BSKDNold.
      *
      * @param array{number:string,message:string,device_id?:string} $data
      */
     public function send(array $data): bool
     {
-        $data['device_id'] = $data['device_id'] ?? ($this->ccnw['device_id'] ?? '');
+        if (empty($data['device_id'])) {
+            $data['device_id'] = (string) ($this->ccnw['device_id'] ?? '');
+        }
 
         $mode = $this->ccnw['mode'] ?? 'default';
 
@@ -48,29 +56,37 @@ class Notification
         };
     }
 
+    /**
+     * API Whacenter — sama dengan Simple-WA-Notif-for-Circulation.
+     * (Pengganti curl https://app.whacenter.com/api/send di BSKDNold)
+     */
     public function sendToWhacenter(array $data): bool
     {
+        $payload = [
+            'device_id' => $data['device_id'] ?? ($this->ccnw['device_id'] ?? ''),
+            'number' => $data['number'] ?? '',
+            'message' => $data['message'] ?? '',
+        ];
+
         $client = new Client(['timeout' => 15]);
         $response = $client->request('POST', 'https://app.whacenter.com/api/send', [
-            'form_params' => [
-                'device_id' => $data['device_id'] ?? ($this->ccnw['device_id'] ?? ''),
-                'number' => $data['number'],
-                'message' => $data['message'],
-            ],
+            'form_params' => $payload,
         ]);
 
         return $response->getStatusCode() >= 200 && $response->getStatusCode() < 300;
     }
 
+    /**
+     * API Fonnte — sama dengan Simple-WA-Notif-for-Circulation.
+     */
     public function sendToFonnte(array $data): bool
     {
-        $client = new Client(['timeout' => 15]);
-        $payload = [
-            'target' => $data['number'],
-            'message' => $data['message'],
-            'countryCode' => '62',
-        ];
+        $payload = $data;
+        $payload['target'] = $data['number'] ?? '';
+        $payload['countryCode'] = $data['countryCode'] ?? '62';
+        unset($payload['number'], $payload['device_id']);
 
+        $client = new Client(['timeout' => 15]);
         $response = $client->request('POST', 'https://api.fonnte.com/send', [
             'headers' => [
                 'Authorization' => (string) ($this->ccnw['token'] ?? ''),

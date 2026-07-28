@@ -17,13 +17,15 @@ return [
     // Mode kirim: default | gearman | nsq
     'mode' => 'default',
 
-    // Provider API: fonnte | whacenter
+    // Provider API (Simple-WA-Notif): 'fonnte' | 'whacenter'
+    // BSKDNold sebelumnya hanya curl Whacenter; sekarang diganti API ini.
     'provider' => 'fonnte',
 
-    // Token Fonnte (wajib jika provider = fonnte)
+    // Token Fonnte (wajib jika provider = fonnte) — https://fonnte.com/
     'token' => 'YOUR_TOKEN_HERE',
 
-    // Device ID Whacenter (wajib jika provider = whacenter)
+    // Device ID Whacenter (wajib jika provider = whacenter) — https://whacenter.com/
+    // Pengganti device_id kosong di curl BSKDNold.
     'device_id' => 'YOUR_DEVICE_ID_HERE',
 
     // Kirim juga notifikasi WA saat tombol overdue e-mail diklik

@@ -108,12 +108,21 @@ Default cocok untuk sirkulasi ringan. Untuk traffic tinggi:
 - `mode = gearman` — butuh Gearman Job Server + ekstensi PHP gearman
 - `mode = nsq` — butuh NSQ message broker
 
+## Migrasi API BSKDNold → Simple-WA-Notif
+
+| BSKDNold (lama) | Plugin ini (baru) |
+|---|---|
+| `curl` ke `https://app.whacenter.com/api/send` | `\Cncw\Notification` (Guzzle) seperti Simple-WA-Notif |
+| `sendOverdueNoticeWA()` di `member_base_lib.inc.php.bak` | `Service::sendOverdueNotice()` + menu **Overdue WA Notice** |
+| `sendMessage()` di `pop_loan_receipt.php.bak` | Hook `circulation_after_successful_transaction` |
+| Hanya Whacenter | **Fonnte** + **Whacenter** (pilih di `config.php`) |
+
 ## Catatan teknis (perubahan dari sumber)
 
 - PHP 8+: typed properties, `match`, nullsafe-friendly helpers
 - Tidak lagi butuh Composer terpisah (Doctrine/Valitron/Pagination dihapus)
 - Koneksi DB memakai `\SLiMS\DB` (bukan kredensial DB ganda di bootstrap)
-- HTTP client memakai **Guzzle bawaan SLiMS**
+- HTTP client memakai **Guzzle bawaan SLiMS** (API Simple-WA-Notif)
 - Fitur overdue BSKDNold digabung sebagai menu plugin + hook `overduenotice_init`
 - Semua kode berada di folder `plugins/` (tidak mengubah core SLiMS)
 
