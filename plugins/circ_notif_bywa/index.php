@@ -48,6 +48,8 @@ $rows = $log->getData();
             <br>
             Provider: <strong><?= htmlspecialchars((string) $ccnw['provider'], ENT_QUOTES, 'UTF-8') ?></strong>
             | Mode: <strong><?= htmlspecialchars((string) $ccnw['mode'], ENT_QUOTES, 'UTF-8') ?></strong>
+            <br>
+            <?= __('Ubah token / device ID / nomor HP di') ?> <em>System &rarr; WA Notif Settings</em>
         </div>
         <?php if (is_array($flash)) : ?>
             <div class="alert <?= $flash['status'] === 'SENT' ? 'alert-success' : 'alert-danger' ?>">

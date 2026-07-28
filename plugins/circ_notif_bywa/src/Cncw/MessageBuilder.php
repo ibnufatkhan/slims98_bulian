@@ -29,6 +29,9 @@ class MessageBuilder
         $message .= 'Jn. Angg : ' . ($data['memberType'] ?? '') . "\n";
         $message .= 'Tanggal : ' . ($data['date'] ?? '') . "\n";
         $message .= 'ID : ' . $messageId . "\n";
+        if (!empty($this->ccnw['library_phone'])) {
+            $message .= 'Kontak : ' . $this->ccnw['library_phone'] . "\n";
+        }
 
         if (isset($data['loan']) && is_array($data['loan'])) {
             $message .= "=====================\n";
