@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Circulation & Overdue Notification via WhatsApp
  * Plugin URI: https://github.com/hendrowicaksono/Simple-WA-Notif-for-Circulation
- * Description: Notifikasi WhatsApp untuk transaksi sirkulasi dan keterlambatan. Digabung dari Simple-WA-Notif-for-Circulation + fitur overdue BSKDNold. Provider: Fonnte & Whacenter. PHP 8+.
- * Version: 2.0.0
+ * Description: Notifikasi WhatsApp untuk transaksi sirkulasi dan keterlambatan. Digabung dari Simple-WA-Notif-for-Circulation + fitur overdue BSKDNold. Provider: Fonnte & Whacenter. Konfigurasi via System menu. PHP 8+.
+ * Version: 2.1.0
  * Author: SLiMS Community / Hendro Wicaksono / BSKDN
  * Author URI: https://github.com/hendrowicaksono
  */
@@ -15,6 +15,9 @@ use SLiMS\Plugins;
 require_once __DIR__ . '/autoload.php';
 
 $plugin = Plugins::getInstance();
+
+// Konfigurasi di modul System (menggantikan edit config.php)
+$plugin->registerMenu('system', __('WA Notif Settings'), __DIR__ . '/settings.php');
 
 // Menu log di modul Circulation
 $plugin->registerMenu('circulation', __('WA Notif Log'), __DIR__ . '/index.php');
