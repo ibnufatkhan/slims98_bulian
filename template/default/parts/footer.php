@@ -3,85 +3,110 @@
 # @Date:   2018-01-23T11:26:05+07:00
 # @Email:  ido.alit@gmail.com
 # @Filename: footer.php
-# @Last modified by:   user
-# @Last modified time: 2018-01-23T11:26:47+07:00
+# Customized for Perpustakaan Soepardjo Roestam (BSKDN)
 ?>
 
+<footer id="footer">
 
-<footer class="py-4 bg-grey-darkest text-grey-lighter">
-    <div class="container">
-        <div class="row py-4">
-            <div class="col-md-3">
-              <?php
-              if(isset($sysconf['logo_image']) && $sysconf['logo_image'] != '' && $imagesDisk->isExists($path = 'default/'.$sysconf['logo_image'])){
-                echo '<img class="h-10 w-15" src="'.SWB . 'lib/minigalnano/createthumb.php?filename=images/' . $path.'&width=350">';
-              }
-              elseif (file_exists(__DIR__ . '/../assets/images/logo.png')) {
-                echo '<img class="h-12 w-12 mb-2" src="' . assets(v('images/logo.png')) . '">';
-              } else {
-                ?>
-                  <svg
-                          class="fill-current text-grey-lighter block h-12 w-12 mb-2"
-                          version="1.1"
-                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                          viewBox="0 0 118.4 135" style="enable-background:new 0 0 118.4 135;"
-                          xml:space="preserve">
-                    <path d="M118.3,98.3l0-62.3l0-0.2c-0.1-1.6-1-3-2.3-3.9c-0.1,0-0.1-0.1-0.2-0.1L61.9,0.8c-1.7-1-3.9-1-5.4-0.1l-54,31.1
-                    l-0.4,0.2C0.9,33,0.1,34.4,0,36c0,0.1,0,0.2,0,0.3l0,62.4l0,0.3c0.1,1.6,1,3,2.3,3.9c0.1,0.1,0.2,0.1,0.2,0.2l53.9,31.1l0.3,0.2
-                    c0.8,0.4,1.6,0.6,2.4,0.6c0.8,0,1.5-0.2,2.2-0.5l53.9-31.1c0.3-0.1,0.6-0.3,0.9-0.5c1.2-0.9,2-2.3,2.1-3.7c0-0.1,0-0.3,0-0.4
-                    C118.4,98.6,118.3,98.5,118.3,98.3z M114.4,98.8c0,0.3-0.2,0.7-0.5,0.9c-0.1,0.1-0.2,0.1-0.2,0.1l-20.6,11.9L59.2,92.1l-33.9,19.6
-                    L4.6,99.7l0,0l0,0C4.2,99.5,4,99.2,4,98.8l0-62.5l0,0l0-0.1c0-0.4,0.2-0.7,0.5-0.9l20.8-12l33.9,19.6l33.9-19.6l20.6,11.9l0.1,0
-                    c0.3,0.2,0.5,0.5,0.6,0.9l0,62.3L114.4,98.8L114.4,98.8z M95.3,68.6v39.4L23.1,66.4V26.9L95.3,68.6z"/>
-                </svg>
-              <?php } ?>
-                <div class="mb-4"><?php echo $sysconf['library_name']; ?></div>
-                <ul class="list-reset">
-                    <li><a class="text-light" href="index.php?p=libinfo"><?= __('Information'); ?></a></li>
-                    <li><a class="text-light" href="index.php?p=services"><?= __('Services'); ?></a></li>
-                    <li><a class="text-light" href="index.php?p=librarian"><?= __('Librarian'); ?></a></li>
-                    <li><a class="text-light" href="index.php?p=member"><?= __('Member Area'); ?></a></li>
-                </ul>
-            </div>
-            <div class="col-md-5 pt-8 md:pt-0">
-                <h4 class="mb-4"><?= __('About Us'); ?></h4>
-                <p>
-                    <?= $sysconf['template']['classic_footer_about_us']; ?>
-                </p>
-            </div>
-            <div class="col-md-4 pt-8 md:pt-0">
-                <h4 class="mb-4"><?= __('Search'); ?></h4>
-                <div class="mb-2"><?= __('start it by typing one or more keywords for title, author or subject'); ?></div>
-                <form action="index.php">
-                    <input type="hidden" ref="csrf_token" value="<?= $_SESSION['csrf_token']??'' ?>">
-                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']??'' ?>">
-                    <div class="input-group mb-3">
-                        <input name="keywords" type="text" class="form-control"
-                               placeholder="<?= __('Enter keywords'); ?>"
-                               aria-label="Enter keywords"
-                               aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit" value="search" name="search"
-                                    id="button-addon2"><?= __('Find Collection'); ?>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <hr>
-                <a target="_blank" title="Support Us" class="btn btn-outline-success mb-2"
-                   href="https://slims.web.id/web/pages/support-us/"><i
-                            class="fas fa-heart mr-2"></i><?= __('Keep SLiMS Alive'); ?></a>
-                <a target="_blank" title="Contribute" class="btn btn-outline-light mb-2"
-                   href="https://github.com/slims/"><i
-                            class="fab fa-github mr-2"></i><?= __('Want to Contribute?'); ?></a>
-            </div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+		  <div class="col-lg-3 col-md-6 footer-contact">
+            <img src="template/default/assets/one/img/logo.png" alt="" class="img-fluid right" width="70%">
+            
+          </div>
+          <div class="col-lg-3 col-md-6 footer-contact">
+            
+            <p>
+              Jl. Kramat Raya No.132, RW.9, Kenari, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10430<br>
+              Indonesia <br><br>
+              <strong>Phone:</strong> (021) 3101953, 3101955, 3901071, 3901072<br>
+              <strong>Email:</strong> badanlitbang@kemendagri.go.id<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Related Link</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="http://perpustakaan.kemendagri.go.id">Perpustakaan Kemendagri</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="http://www.pnri.go.id">Perpustakaan Nasional</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="http://perpustakaan.dpr.go.id">Perpustakaan DPR</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="http://lib.unj.ac.id">Perpustakaan UNJ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="http://lipi.go.id">LIPI</a></li>
+            </ul>
+          </div>
+		<!--
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Join Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+		-->
         </div>
-        <hr>
-        <div class="flex font-thin text-sm">
-            <p class="flex-1">&copy; <?php echo date('Y'); ?> &mdash; Senayan Developer Community</p>
-            <div class="flex-1 text-right text-grey"><?= __('Powered by '); ?><code>SLiMS</code></div>
-        </div>
+      </div>
     </div>
-</footer>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Template by <strong><span> Jakarta SLiMS Community 2022</span></strong>. 
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+          
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="https://www.youtube.com/channel/UCnPNf4BtDe90oblU6CKyf7w" class="youtube"><i class="bx bxl-youtube"></i></a>
+        <a href="https://twitter.com/litbangKDN" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="https://www.facebook.com/badanlitbangkemendagri" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="https://www.instagram.com/soepardjoroestam.lib" target="_blank" rel="noopener" class="instagram"><i class="bx bxl-instagram"></i></a>
+        
+      </div>
+    </div>
+  </footer>
+
+<!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="template/default/assets/one/vendor/purecounter/purecounter.js"></script>
+  <script src="template/default/assets/one/vendor/aos/aos.js"></script>
+  <script src="template/default/assets/one/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="template/default/assets/one/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="template/default/assets/one/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="template/default/assets/one/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="template/default/assets/one/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="template/default/assets/one/js/main.js"></script>
+
+
+
+
+
+
+
+
 
 <?php if ($sysconf['chat_system']['enabled'] && $sysconf['chat_system']['opac']) : ?>
     <div id="show-pchat2" style="position: fixed; bottom: 16px; right: 16px" class="shadow rounded">
@@ -125,3 +150,4 @@ include LIB . "contents/chat.php"; ?>
 <?php endif; ?>
 </body>
 </html>
+
