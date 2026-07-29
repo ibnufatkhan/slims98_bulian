@@ -4,8 +4,8 @@
  *
  * Plugin Name: Visitor Stats Footer
  * Plugin URI: https://github.com/ibnufatkhan/slims98_bulian
- * Description: Menampilkan penghitung jumlah pengunjung (visitor_count) 12 bulan terakhir di sisi kanan footer OPAC.
- * Version: 1.0.0
+ * Description: Menampilkan penghitung pengunjung web OPAC sepanjang masa di sisi kanan footer.
+ * Version: 1.1.0
  * Author: Ibnu Fatkhan
  * Author URI: https://github.com/ibnufatkhan
  */
@@ -17,21 +17,21 @@ require_once __DIR__ . '/helper.php';
 $plugin = Plugins::getInstance();
 
 /**
- * Inject widget pengunjung ke footer kanan tanpa mengubah template.
+ * Inject widget pengunjung web ke slot kanan footer.
  */
 $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
-    $count = visitor_stats_count_last_months(12);
-    $label = __('Pengunjung 12 bulan terakhir');
+    $count = visitor_stats_record_and_total();
+    $label = __('Pengunjung web');
     $formatted = number_format((int) $count, 0, ',', '.');
 
-    $cssUrl = SWB . 'plugins/visitor_stats/assets/visitor_stats.css?v=1.0.0';
+    $cssUrl = SWB . 'plugins/visitor_stats/assets/visitor_stats.css?v=1.1.0';
     if (!defined('VISITOR_STATS_CSS_LOADED')) {
         define('VISITOR_STATS_CSS_LOADED', true);
         $opac->js = ($opac->js ?? '') . '<link rel="stylesheet" href="' . $cssUrl . '">';
     }
 
-    $html = '<div id="visitor-stats-footer" class="visitor-stats-footer" title="' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '">'
-        . '<i class="ri-group-fill" aria-hidden="true"></i>'
+    $html = '<div id="visitor-stats-footer" class="visitor-stats-footer" title="' . htmlspecialchars($label . ' (sejak awal)', ENT_QUOTES, 'UTF-8') . '">'
+        . '<i class="ri-global-line" aria-hidden="true"></i>'
         . '<span class="visitor-stats-label">' . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . '</span>'
         . '<strong class="visitor-stats-count">' . htmlspecialchars($formatted, ENT_QUOTES, 'UTF-8') . '</strong>'
         . '</div>';
@@ -71,19 +71,25 @@ $plugin->register(Plugins::CONTENT_BEFORE_LOAD, function ($opac) {
     var widget = wrap.firstElementChild;
     if (!widget) return;
 
-    // Target: baris copyright footer (kanan)
-    var bar = document.querySelector('footer#footer .container.d-md-flex, footer .container.d-md-flex, footer .container.d-flex');
-    var social = document.querySelector('footer#footer .social-links, footer .social-links');
-
-    if (social && social.parentNode) {
-      social.parentNode.insertBefore(widget, social);
+    // Slot kanan footer (template BSKDN)
+    var slot = document.getElementById('visitor-stats-slot');
+    if (slot) {
+      slot.appendChild(widget);
       return;
     }
+
+    // Fallback: taruh di kanan bar bawah footer
+    var bar = document.querySelector('footer#footer .footer-bottom-bar, footer#footer .container.d-md-flex, footer .container.d-md-flex');
+    var social = document.querySelector('footer#footer .social-links, footer .social-links');
     if (bar) {
       bar.appendChild(widget);
+      widget.style.marginLeft = 'auto';
       return;
     }
-
+    if (social && social.parentNode) {
+      social.parentNode.appendChild(widget);
+      return;
+    }
     var footer = document.querySelector('footer#footer, footer');
     if (footer) footer.appendChild(widget);
   }

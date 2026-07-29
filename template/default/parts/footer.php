@@ -10,12 +10,12 @@
 
     <div class="footer-top">
       <div class="container">
-        <div class="row">
+        <div class="row align-items-start">
 		  <div class="col-lg-3 col-md-6 footer-contact">
             <img src="template/default/assets/one/img/logo.png" alt="" class="img-fluid right" width="70%">
             
           </div>
-          <div class="col-lg-3 col-md-6 footer-contact">
+          <div class="col-lg-4 col-md-6 footer-contact">
             
             <p>
               Jl. Kramat Raya No.132, RW.9, Kenari, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10430<br>
@@ -25,7 +25,7 @@
             </p>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
+          <div class="col-lg-3 col-md-6 footer-links ms-lg-auto text-lg-start">
             <h4>Related Link</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="http://perpustakaan.kemendagri.go.id">Perpustakaan Kemendagri</a></li>
@@ -59,9 +59,8 @@
       </div>
     </div>
 
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
+    <div class="container footer-bottom-bar py-4">
+      <div class="footer-bottom-left text-center text-md-start">
         <div class="copyright">
           &copy; Template by <strong><span>SLiMS Community 2026</span></strong>
         </div>
@@ -73,15 +72,66 @@
           
         </div>
       </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+      <div class="footer-bottom-center social-links text-center">
         <a href="https://www.youtube.com/channel/UCnPNf4BtDe90oblU6CKyf7w" class="youtube"><i class="bx bxl-youtube"></i></a>
         <a href="https://twitter.com/litbangKDN" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="https://www.facebook.com/badanlitbangkemendagri" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="https://www.instagram.com/soepardjoroestam.lib" target="_blank" rel="noopener" class="instagram"><i class="bx bxl-instagram"></i></a>
-        
       </div>
+      <div class="footer-bottom-right text-center text-md-end" id="visitor-stats-slot"></div>
     </div>
   </footer>
+
+<style>
+/* BSKDN footer bottom bar: copyright | social (center) | visitor (right) */
+#footer .footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  gap: 12px;
+  min-height: 48px;
+}
+#footer .footer-bottom-left {
+  flex: 1 1 0;
+  z-index: 1;
+}
+#footer .footer-bottom-center.social-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0 !important;
+  z-index: 2;
+  white-space: nowrap;
+}
+#footer .footer-bottom-right {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+  min-height: 36px;
+}
+@media (max-width: 767.98px) {
+  #footer .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+  #footer .footer-bottom-center.social-links {
+    position: static;
+    transform: none;
+    order: 2;
+    margin: 8px 0;
+  }
+  #footer .footer-bottom-left { order: 1; }
+  #footer .footer-bottom-right {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+  }
+}
+</style>
 
 <!-- End Footer -->
 

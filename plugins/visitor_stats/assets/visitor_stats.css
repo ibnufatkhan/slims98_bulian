@@ -1,14 +1,13 @@
 /**
  * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
  *
- * Visitor Stats Footer — styles for right-side OPAC footer counter
+ * Visitor Stats Footer — styles for right-side OPAC footer web counter
  */
 
 #visitor-stats-footer.visitor-stats-footer {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-right: 16px;
   padding: 6px 12px;
   border-radius: 999px;
   background: rgba(36, 135, 206, 0.12);
@@ -36,18 +35,24 @@
   color: #2487ce;
 }
 
+#visitor-stats-slot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @media (max-width: 767.98px) {
   #visitor-stats-footer.visitor-stats-footer {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin: 0 0 12px 0;
+    margin: 0;
     white-space: normal;
     text-align: center;
   }
 
-  footer#footer .container.d-md-flex {
-    flex-direction: column;
-    align-items: center;
+  #visitor-stats-slot {
+    justify-content: center;
+    width: 100%;
   }
 }
