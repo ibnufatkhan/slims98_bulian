@@ -150,17 +150,17 @@ Vue.component('slims-book', {
         }
     },
     render: function (createElement) {
-        return createElement('div', {
-            attrs: {
-                class: 'w-48 pr-4 pb-4'
-            }
-        }, [
-            createElement('a', {
+            return createElement('div', {
                 attrs: {
-                    href: `index.php?p=show_detail&id=${this.biblioId}`,
-                    class: 'card border-0 hover:shadow cursor-pointer text-decoration-none h-full'
-                },
+                    class: 'collection-item pr-4 pb-4'
+                }
             }, [
+                createElement('a', {
+                    attrs: {
+                        href: `index.php?p=show_detail&id=${this.biblioId}`,
+                        class: 'card border-0 hover:shadow cursor-pointer text-decoration-none h-full'
+                    },
+                }, [
                 createElement('div', {
                     attrs: {
                         class: 'card-body'
@@ -346,7 +346,7 @@ Vue.component('slims-collection', {
         } else {
             return createElement('div', {
                 attrs: {
-                    class: 'flex flex-wrap mt-4 collection'
+                    class: 'flex flex-nowrap mt-4 collection collection-single-row'
                 }
             }, this.biblios.map(function (item) {
                 return createElement('slims-book', {

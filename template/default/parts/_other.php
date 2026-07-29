@@ -9,17 +9,9 @@
 
 <div class="result-search pb-5">
     <section id="section1 container-fluid">
-        <header class="c-header">
-            <div class="mask"></div>
-          <?php
-          // ----------------------------------------------------------------------
-          // include navbar part
-          // ----------------------------------------------------------------------
-          include '_navbar.php'; ?>
-        </header>
       <?php
       // ------------------------------------------------------------------------
-      // include search form part
+      // include search form part (navbar already loaded in header.php)
       // ------------------------------------------------------------------------
       include '_search-form.php'; ?>
     </section>

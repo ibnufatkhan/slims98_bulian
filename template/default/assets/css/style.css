@@ -993,3 +993,18 @@ pre.sf-dump, pre.sf-dump .sf-dump-default {
 .item-onreserve {
     background-color: orange; 
 }
+
+/* BSKDN: force popular/new collection to a single neat row */
+.collection.collection-single-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.collection.collection-single-row > .collection-item,
+.collection.collection-single-row > div {
+  flex: 1 1 0;
+  min-width: 140px;
+  max-width: none;
+  width: auto !important;
+}

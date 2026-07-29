@@ -68,6 +68,13 @@ $request_uri = urlencode(strip_tags(urldecode($_SERVER['REQUEST_URI'])));
     <link rel="stylesheet" href="<?php echo assets('plugin/font-awesome/css/fontawesome-all.min.css'); ?>">
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="<?php echo assets('css/tailwind.min.css'); ?>">
+    <!-- Bootstrap Icons + Remixicon (BSKDN hero icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- OnePage template CSS -->
+    <link rel="stylesheet" href="<?php echo assets('one/vendor/aos/aos.css'); ?>">
+    <link rel="stylesheet" href="<?php echo assets('one/css/style.css?v=' . date('Ymd-his')); ?>">
     <!-- Vegas CSS -->
     <link rel="stylesheet" href="<?php echo assets('plugin/vegas/vegas.min.css'); ?>">
     <link href="<?php echo JWB; ?>toastr/toastr.min.css?<?php echo date('this') ?>" rel="stylesheet" type="text/css"/>
@@ -80,6 +87,44 @@ $request_uri = urlencode(strip_tags(urldecode($_SERVER['REQUEST_URI'])));
     <link rel="stylesheet" href="<?php echo assets('css/flag-icon.min.css'); ?>">
     <!-- // my custom style -->
     <link rel="stylesheet" href="<?php echo assets('css/style.css?v=' . date('Ymd-his')); ?>">
+
+    <style>
+        :root {
+            --primary-color: #124265;
+            --accent-color: #2487ce;
+        }
+        body {
+            padding-top: 125px !important;
+            background-color: #f8fbfe;
+            font-family: "Open Sans", sans-serif;
+        }
+        #main-header {
+            background: #ffffff;
+            height: 100px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 9999;
+            box-shadow: 0px 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 10px;
+            padding-right: 25px;
+        }
+        .logo-img {
+            max-height: 60px;
+            width: auto;
+            margin-top: 12px;
+            margin-left: 0;
+        }
+        .s-search-form ul { display: block !important; }
+        .navbar { margin-top: 10px; }
+        @media (max-width: 768px) {
+            #main-header { height: 80px; padding-left: 5px; }
+            .logo-img { max-height: 45px; margin-top: 5px; }
+            body { padding-top: 100px !important; }
+        }
+    </style>
 
     <?php
     $icon = SWB . 'webicon.ico';
@@ -113,3 +158,7 @@ $request_uri = urlencode(strip_tags(urldecode($_SERVER['REQUEST_URI'])));
 
 </head>
 <body class="bg-grey-lightest">
+<?php
+// BSKDN fixed top header/navigation (shared across all OPAC pages)
+include __DIR__ . '/_navbar.php';
+?>
