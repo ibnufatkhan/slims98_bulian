@@ -28,8 +28,11 @@ plugins/*
 !plugins/read_counter/
 !plugins/landing_rating/
 !plugins/circ_notif_bywa/
+!plugins/visitor_stats/
 
 template/*
+!template/default/
+!template/default/**
 
 # Windows image file caches
 Thumbs.db

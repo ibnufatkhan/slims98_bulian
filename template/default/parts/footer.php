@@ -63,7 +63,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Template by <strong><span> Jakarta SLiMS Community 2022</span></strong>. 
+          &copy; Template by <strong><span>SLiMS Community 2026</span></strong>
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
