@@ -1,0 +1,53 @@
+/**
+ * Made by lovely form Ibnu Fatkhan ibnufatkhan@gmail.com
+ *
+ * Visitor Stats Footer — styles for right-side OPAC footer counter
+ */
+
+#visitor-stats-footer.visitor-stats-footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(36, 135, 206, 0.12);
+  color: #124265;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+#visitor-stats-footer .visitor-stats-label {
+  color: #4a667a;
+  font-weight: 500;
+}
+
+#visitor-stats-footer .visitor-stats-count {
+  color: #2487ce;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#visitor-stats-footer i {
+  font-size: 18px;
+  color: #2487ce;
+}
+
+@media (max-width: 767.98px) {
+  #visitor-stats-footer.visitor-stats-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 0 12px 0;
+    white-space: normal;
+    text-align: center;
+  }
+
+  footer#footer .container.d-md-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+}
