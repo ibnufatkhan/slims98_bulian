@@ -61,6 +61,9 @@ $logon->getHook();
 // Captcha initialize
 $captcha = Captcha::section('memberarea');
 
+// I Am Not Robot plugin (plugins/iam_not_robot) — takes precedence when active
+$iamNotRobot = defined('IAM_NOT_ROBOT_ACTIVE') && IAM_NOT_ROBOT_ACTIVE && function_exists('iam_not_robot_validate');
+
 // check if member already logged in
 $is_member_login = utility::isMemberLogin();
 
@@ -101,15 +104,21 @@ if (isset($_POST['logMeIn']) && !$is_member_login) {
     // check if username or password is empty
     if (!$username OR !$password) redirect()->withMessage('empty_field', __('Please fill your Username and Password to Login!'))->back();
     
-    # <!-- Captcha form processing - start -->
-    if ($captcha->isSectionActive() && $captcha->isValid() === false) {
+    # <!-- Captcha / I'm not a robot form processing - start -->
+    if ($iamNotRobot) {
+        if (!iam_not_robot_validate()) {
+            $message = isDev() ? iam_not_robot_error() : __("I'm not a robot verification failed. Please try again.");
+            session_unset();
+            redirect()->withMessage('captchaInvalid', $message)->back();
+        }
+    } elseif ($captcha->isSectionActive() && $captcha->isValid() === false) {
         // set error message
         $message = isDev() ? $captcha->getError() : __('Wrong Captcha Code entered, Please write the right code!'); 
         // What happens when the CAPTCHA was entered incorrectly
         session_unset();
         redirect()->withMessage('captchaInvalid', $message)->back();
     }
-    # <!-- Captcha form processing - end -->
+    # <!-- Captcha / I'm not a robot form processing - end -->
 
     // regenerate session ID to prevent session hijacking
     session_regenerate_id(true);
@@ -1060,18 +1069,20 @@ if ($is_member_login) :
                                                 placeholder="Enter password" required autocomplete="off"/></div>
                 <?= \Volnix\CSRF\CSRF::getHiddenInputString() ?>
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']??'' ?>">
-                <!-- Captcha in form - start -->
+                <!-- Captcha / I'm not a robot in form - start -->
                 <div>
                     <?php 
-                    if ($captcha->isSectionActive()) { ?>
+                    if ($iamNotRobot) { ?>
+                        <div class="captchaMember iamnr-member">
+                            <?= iam_not_robot_render('memberarea') ?>
+                        </div>
+                    <?php } elseif ($captcha->isSectionActive()) { ?>
                         <div class="captchaMember">
                             <?= $captcha->getCaptcha() ?>
                         </div>
-                        <?php
-                    }
-                    ?>
+                    <?php } ?>
                 </div>
-                <!-- Captcha in form - end -->
+                <!-- Captcha / I'm not a robot in form - end -->
                 <input type="submit" name="logMeIn" value="<?php echo __('Login'); ?>" class="memberButton"/>
             </form>
         </div>

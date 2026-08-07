@@ -77,6 +77,9 @@ if (isset($_GET['wrongpass'])) {
 // Captcha initialize
 $captcha = Captcha::section('librarian');
 
+// I Am Not Robot plugin (plugins/iam_not_robot) — takes precedence when active
+$iamNotRobot = defined('IAM_NOT_ROBOT_ACTIVE') && IAM_NOT_ROBOT_ACTIVE && function_exists('iam_not_robot_validate');
+
 // start the output buffering for main content
 ob_start();
 
@@ -87,8 +90,14 @@ if (isset($_POST['logMeIn'])) {
         redirect()->withMessage('csrf_failed', __('Invalid login form!'))->back();
     }
 
-    # <!-- Captcha form processing - start -->
-    if ($captcha->isSectionActive() && $captcha->isValid() === false) {
+    # <!-- Captcha / I'm not a robot form processing - start -->
+    if ($iamNotRobot) {
+        if (!iam_not_robot_validate()) {
+            $message = isDev() ? iam_not_robot_error() : __("I'm not a robot verification failed. Please try again.");
+            session_unset();
+            redirect()->withMessage('captchaInvalid', $message)->back();
+        }
+    } elseif ($captcha->isSectionActive() && $captcha->isValid() === false) {
         // set error message
         $message = isDev() ? $captcha->getError() : __('Wrong Captcha Code entered, Please write the right code!'); 
         // What happens when the CAPTCHA was entered incorrectly
@@ -217,16 +226,18 @@ $_uname = (isset($_COOKIE['uname'])) ? trim($_COOKIE['uname']) : '';
             <div class="login_input"><input type="password" name="passWord" class="login_input" autocomplete="off" required /></div>
             <?= \Volnix\CSRF\CSRF::getHiddenInputString() ?>
             
-            <!-- Captcha in form - start -->
+            <!-- Captcha / I'm not a robot in form - start -->
             <?php 
-            if ($captcha->isSectionActive()) { ?>
+            if ($iamNotRobot) { ?>
+                <div class="captchaAdmin iamnr-admin">
+                    <?= iam_not_robot_render('librarian') ?>
+                </div>
+            <?php } elseif ($captcha->isSectionActive()) { ?>
                 <div class="captchaAdmin">
                     <?= $captcha->getCaptcha() ?>
                 </div>
-                <?php
-            }
-            ?>
-            <!-- Captcha in form - end -->
+            <?php } ?>
+            <!-- Captcha / I'm not a robot in form - end -->
 
             <div class="marginTop">
                 <div class="remember_forgot">

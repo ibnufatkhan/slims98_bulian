@@ -29,6 +29,7 @@ plugins/*
 !plugins/landing_rating/
 !plugins/circ_notif_bywa/
 !plugins/visitor_stats/
+!plugins/iam_not_robot/
 
 template/*
 !template/default/
