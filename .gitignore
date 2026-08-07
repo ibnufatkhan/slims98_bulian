@@ -33,6 +33,8 @@ plugins/*
 template/*
 !template/default/
 !template/default/**
+!template/ibn-bulian-d-ace/
+!template/ibn-bulian-d-ace/**
 
 # Windows image file caches
 Thumbs.db
