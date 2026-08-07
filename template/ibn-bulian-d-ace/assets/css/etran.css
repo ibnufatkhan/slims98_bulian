@@ -1,0 +1,728 @@
+/* Ibn Bulian D'ACE — Etran visual system for SLiMS OPAC */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --etran-forest: #3a4a1c;
+  --etran-forest-deep: #2b3612;
+  --etran-olive: #5a6b2f;
+  --etran-olive-soft: #697d35;
+  --etran-lime: #c8e056;
+  --etran-lime-bright: #d4ec6a;
+  --etran-mint: #eef6c9;
+  --etran-ink: #14180c;
+  --etran-muted: #6b7360;
+  --etran-white: #ffffff;
+  --etran-fog: #f4f6f0;
+  --etran-footer: #1c2a28;
+  --etran-radius: 28px;
+  --etran-radius-sm: 18px;
+  --etran-radius-btn: 12px;
+  --etran-shadow: 0 18px 50px rgba(20, 24, 12, 0.18);
+  --primary-color: var(--etran-forest);
+  --accent-color: var(--etran-lime);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.etran-body {
+  margin: 0;
+  padding-top: 0 !important;
+  background: var(--etran-white);
+  color: var(--etran-ink);
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.etran-body.bg-grey-lightest {
+  background: var(--etran-white) !important;
+}
+
+.etran-serif {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* ========== Top bar (inner pages) ========== */
+.etran-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--etran-forest-deep);
+  color: var(--etran-white);
+}
+
+.etran-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--etran-white);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.etran-brand:hover {
+  color: var(--etran-lime);
+  text-decoration: none;
+}
+
+.etran-mark {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.etran-mark svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--etran-lime);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.etran-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.etran-nav a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.etran-nav a:hover {
+  color: var(--etran-lime);
+}
+
+.etran-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--etran-radius-btn);
+  border: 0;
+  background: var(--etran-lime);
+  color: var(--etran-ink);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.etran-btn:hover {
+  background: var(--etran-lime-bright);
+  color: var(--etran-ink);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(200, 224, 86, 0.35);
+}
+
+.etran-btn-ghost {
+  background: transparent;
+  color: var(--etran-white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.etran-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--etran-white);
+}
+
+/* ========== Split hero (matches Figma thumbnail) ========== */
+.etran-hero {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(360px, 1.15fr);
+  min-height: 100vh;
+  background: var(--etran-white);
+}
+
+.etran-hero-left {
+  background:
+    radial-gradient(120% 80% at 0% 100%, rgba(200, 224, 86, 0.12), transparent 55%),
+    linear-gradient(165deg, var(--etran-forest) 0%, var(--etran-forest-deep) 100%);
+  color: var(--etran-white);
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.etran-hero-left-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.etran-hero-copy h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  max-width: 11ch;
+}
+
+.etran-hero-copy p {
+  margin: 1rem 0 0;
+  color: rgba(238, 246, 201, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 34ch;
+}
+
+.etran-offerings {
+  margin-top: auto;
+}
+
+.etran-offerings-label {
+  display: block;
+  margin-bottom: 0.85rem;
+  color: var(--etran-lime);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.etran-offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.etran-offer-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.1rem 0.9rem;
+  text-align: center;
+  color: var(--etran-white);
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.etran-offer-card:hover {
+  transform: translateY(-4px);
+  background: rgba(200, 224, 86, 0.12);
+  border-color: rgba(200, 224, 86, 0.35);
+  color: var(--etran-white);
+  text-decoration: none;
+}
+
+.etran-offer-icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 0.7rem;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(200, 224, 86, 0.16);
+  color: var(--etran-lime);
+  font-size: 1.25rem;
+}
+
+.etran-offer-card strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.etran-hero-left-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.etran-hero-left-links a {
+  color: rgba(238, 246, 201, 0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.etran-hero-left-links a:hover {
+  color: var(--etran-lime);
+}
+
+.etran-hero-right {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background:
+    linear-gradient(180deg, #fbfcfa 0%, #ffffff 40%, #f7f9f2 100%);
+}
+
+.etran-hero-media {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  border-radius: var(--etran-radius);
+  overflow: hidden;
+  box-shadow: var(--etran-shadow);
+  background: #dfe6d0;
+}
+
+.etran-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.etran-toast {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(200, 224, 86, 0.92);
+  color: var(--etran-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(6px);
+  animation: etran-float 4.5s ease-in-out infinite;
+}
+
+.etran-toast i {
+  font-size: 0.95rem;
+}
+
+.etran-toast-1 { top: 14%; left: 8%; animation-delay: 0s; }
+.etran-toast-2 { top: 28%; right: 8%; animation-delay: 0.8s; }
+.etran-toast-3 { bottom: 18%; left: 18%; animation-delay: 1.4s; }
+
+@keyframes etran-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.etran-hero-tagline {
+  text-align: center;
+  max-width: 28rem;
+  margin: 0 auto;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: var(--etran-ink);
+}
+
+.etran-partners {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.etran-partner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--etran-olive);
+  font-weight: 700;
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.etran-partner i {
+  font-size: 1.1rem;
+}
+
+/* ========== Search strip ========== */
+.etran-search {
+  background: var(--etran-fog);
+  padding: 3.5rem 1.5rem;
+}
+
+.etran-search-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.etran-search h2 {
+  text-align: center;
+  margin: 0 0 1.25rem;
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.etran-search .s-search-form,
+.etran-search form {
+  background: var(--etran-white);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 12px 40px rgba(20, 24, 12, 0.08);
+}
+
+/* ========== Sections shared ========== */
+.etran-section {
+  padding: 4.5rem 1.5rem;
+}
+
+.etran-section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.etran-kicker {
+  color: var(--etran-olive);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.etran-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.etran-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--etran-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Stats */
+.etran-stats {
+  background: var(--etran-lime);
+}
+
+.etran-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.etran-stat-card {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: var(--etran-radius-sm);
+  padding: 1.5rem;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.etran-stat-card .num {
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--etran-ink);
+}
+
+.etran-stat-card span {
+  font-weight: 700;
+  color: var(--etran-forest-deep);
+}
+
+.etran-stat-visual {
+  margin-bottom: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--etran-forest);
+  color: var(--etran-lime);
+  font-size: 1.4rem;
+}
+
+/* Reliable / features */
+.etran-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.etran-feature-card {
+  background: var(--etran-white);
+  border-radius: var(--etran-radius-sm);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(20, 24, 12, 0.06);
+}
+
+.etran-feature-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.etran-feature-card .body {
+  padding: 1.15rem 1.2rem 1.4rem;
+}
+
+.etran-feature-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.etran-feature-card p {
+  margin: 0;
+  color: var(--etran-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Software cards */
+.etran-software {
+  background: var(--etran-fog);
+  text-align: center;
+}
+
+.etran-software .etran-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.etran-soft-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+.etran-soft-card {
+  background: var(--etran-forest);
+  color: var(--etran-white);
+  border-radius: var(--etran-radius-sm);
+  padding: 1.5rem 1.2rem;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.etran-soft-card:hover {
+  transform: translateY(-6px);
+  background: var(--etran-olive);
+}
+
+.etran-soft-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(200, 224, 86, 0.16);
+  color: var(--etran-lime);
+  font-size: 1.4rem;
+}
+
+.etran-soft-card strong {
+  font-size: 1.05rem;
+}
+
+/* Collections */
+.etran-collections h4,
+.etran-collections .text-primary {
+  color: var(--etran-forest) !important;
+}
+
+/* CTA */
+.etran-cta {
+  position: relative;
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--etran-white);
+}
+
+.etran-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(43, 54, 18, 0.88), rgba(58, 74, 28, 0.55)),
+    url('../images/etran/cta-phone.jpg') center/cover no-repeat;
+}
+
+.etran-cta-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  max-width: 40rem;
+}
+
+.etran-cta h2 {
+  color: var(--etran-white);
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.etran-footer {
+  background: var(--etran-footer);
+  color: rgba(255, 255, 255, 0.78);
+  padding: 3.5rem 1.5rem 2rem;
+}
+
+.etran-footer-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.etran-footer h4 {
+  color: var(--etran-white);
+  font-size: 0.95rem;
+  margin: 0 0 0.85rem;
+}
+
+.etran-footer a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+}
+
+.etran-footer a:hover {
+  color: var(--etran-lime);
+}
+
+.etran-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.etran-footer li {
+  margin-bottom: 0.45rem;
+}
+
+.etran-footer-bottom {
+  max-width: 1120px;
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+/* Inner page shell */
+.etran-page {
+  min-height: 60vh;
+  padding: 2rem 1.25rem 3rem;
+  background: var(--etran-fog);
+}
+
+.etran-page-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--etran-white);
+  border-radius: var(--etran-radius-sm);
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(20, 24, 12, 0.06);
+}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference) {
+  .etran-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: etran-reveal 0.7s ease forwards;
+  }
+  .etran-reveal-delay-1 { animation-delay: 0.12s; }
+  .etran-reveal-delay-2 { animation-delay: 0.24s; }
+  .etran-reveal-delay-3 { animation-delay: 0.36s; }
+}
+
+@keyframes etran-reveal {
+  to { opacity: 1; transform: none; }
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .etran-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .etran-hero-left,
+  .etran-hero-right {
+    padding: 1.25rem;
+  }
+
+  .etran-hero-media {
+    min-height: 320px;
+  }
+
+  .etran-partners {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .etran-stats-grid,
+  .etran-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .etran-soft-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .etran-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .etran-nav-desktop {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .etran-offerings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .etran-partners {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .etran-soft-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .etran-hero-copy h1 {
+    max-width: none;
+  }
+}
