@@ -1,207 +1,184 @@
 <?php
 /**
- * Ibn Bulian D'ACE — Etran-inspired home for SLiMS OPAC
- * Visual reference: Figma Sites "Ibn-bulian-d-ace-template"
+ * Ibn Bulian D'ACE — uiux Figma prototype (Desktop frame 2:27)
  */
 $library_name = $sysconf['library_name'] ?? 'SLiMS Library';
-$library_sub = $sysconf['library_subname'] ?? 'Senayan Library Management System';
-$theme_base = CURRENT_TEMPLATE_DIR;
-$img = $theme_base . 'assets/images/etran/';
+$library_sub = $sysconf['library_subname'] ?? 'No personal credit checks or founder guarantee.';
+$img = CURRENT_TEMPLATE_DIR . 'assets/images/etran/';
 ?>
 
-<section class="etran-hero" id="hero">
-  <div class="etran-hero-left">
-    <div class="etran-hero-left-top etran-reveal">
-      <a class="etran-brand" href="index.php" aria-label="<?php echo htmlspecialchars($library_name); ?>">
-        <span class="etran-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 9h11"/><path d="M12 5l4 4-4 4"/><path d="M20 15H9"/><path d="M12 19l-4-4 4-4"/></svg>
-        </span>
+<div class="etran-shell" id="hero">
+  <aside class="etran-sidebar">
+    <div class="etran-nav-row">
+      <a class="etran-brand" href="index.php">
+        <img src="<?php echo $img; ?>logo-symbol.svg" alt="">
         <span><?php echo htmlspecialchars($library_name); ?></span>
       </a>
       <a class="etran-btn" href="#cari"><?php echo __('Get started'); ?></a>
     </div>
 
-    <div class="etran-hero-copy etran-reveal etran-reveal-delay-1">
-      <h1><?php echo __('Knowledge Access Made Simple'); ?></h1>
-      <p><?php echo htmlspecialchars($library_sub); ?>. <?php echo __('Search the catalog, borrow collections, and explore digital resources without friction.'); ?></p>
+    <div class="etran-hero-copy">
+      <h1 class="etran-hero-title">
+        <?php echo __('Knowledge access made'); ?> <span class="accent"><?php echo __('simple'); ?></span>
+      </h1>
+      <p class="etran-hero-sub"><?php echo htmlspecialchars($library_sub); ?></p>
     </div>
 
-    <div class="etran-offerings etran-reveal etran-reveal-delay-2">
+    <div class="etran-offerings">
       <span class="etran-offerings-label"><?php echo __('Our offerings'); ?></span>
       <div class="etran-offerings-grid">
+        <a class="etran-offer-card" href="#stats">
+          <img src="<?php echo $img; ?>icons/productivity.svg" alt="" width="30" height="30">
+          <?php echo __('Instant'); ?><br><?php echo __('Productivity'); ?>
+        </a>
         <a class="etran-offer-card" href="#cari">
-          <div class="etran-offer-icon"><i class="bi bi-lightning-charge-fill"></i></div>
-          <strong><?php echo __('Instant Search'); ?></strong>
+          <img src="<?php echo $img; ?>icons/expense.svg" alt="" width="30" height="30">
+          <?php echo __('Collection'); ?><br><?php echo __('Management'); ?>
         </a>
-        <a class="etran-offer-card" href="index.php?p=member">
-          <div class="etran-offer-icon"><i class="bi bi-shield-check"></i></div>
-          <strong><?php echo __('Member Access'); ?></strong>
-        </a>
-        <a class="etran-offer-card" href="index.php?p=news">
-          <div class="etran-offer-icon"><i class="bi bi-globe2"></i></div>
-          <strong><?php echo __('Library News'); ?></strong>
+        <a class="etran-offer-card" href="#software">
+          <img src="<?php echo $img; ?>icons/technology.svg" alt="" width="30" height="30">
+          <?php echo __('Advanced'); ?><br><?php echo __('Technology'); ?>
         </a>
       </div>
     </div>
 
-    <nav class="etran-hero-left-links etran-reveal etran-reveal-delay-3" aria-label="Footer quick links">
+    <nav class="etran-sidebar-links" aria-label="Quick links">
       <a href="#contact"><?php echo __('Contact'); ?></a>
-      <a href="<?php echo $sysconf['template']['classic_instagram_link'] ?? '#'; ?>" target="_blank" rel="noopener"><?php echo __('Social'); ?></a>
+      <a href="<?php echo $sysconf['template']['classic_instagram_link'] ?? '#contact'; ?>"><?php echo __('Social'); ?></a>
       <a href="#contact"><?php echo __('Address'); ?></a>
-      <a href="index.php?p=visitor"><?php echo __('Visitor'); ?></a>
+      <a href="index.php?p=visitor"><?php echo __('Legal Terms'); ?></a>
     </nav>
-  </div>
+  </aside>
 
-  <div class="etran-hero-right">
-    <div class="etran-hero-media etran-reveal">
-      <img src="<?php echo $img; ?>hero-person.jpg" alt="<?php echo htmlspecialchars($library_name); ?>">
-      <span class="etran-toast etran-toast-1"><i class="bi bi-check-circle-fill"></i> <?php echo __('Book reserved!'); ?></span>
-      <span class="etran-toast etran-toast-2"><i class="bi bi-journal-check"></i> <?php echo __('Loan renewed!'); ?></span>
-      <span class="etran-toast etran-toast-3"><i class="bi bi-bookmark-check-fill"></i> <?php echo __('New arrival!'); ?></span>
-    </div>
-    <p class="etran-hero-tagline etran-reveal etran-reveal-delay-1">
-      <?php echo __('We escalate discovery efficiency and reading productivity.'); ?>
-    </p>
-    <div class="etran-partners etran-reveal etran-reveal-delay-2" aria-label="Partners">
-      <div class="etran-partner"><i class="bi bi-flower1"></i> Blooming</div>
-      <div class="etran-partner"><i class="bi bi-check2-circle"></i> BuildRight</div>
-      <div class="etran-partner"><i class="bi bi-robot"></i> Flowbot</div>
-      <div class="etran-partner"><i class="bi bi-box"></i> EXPOR</div>
-      <div class="etran-partner"><i class="bi bi-arrow-repeat"></i> Redo</div>
-    </div>
-  </div>
-</section>
+  <div class="etran-main">
+    <section class="etran-header-block">
+      <div class="etran-header-image">
+        <img src="<?php echo $img; ?>hero-header.jpg" alt="<?php echo htmlspecialchars($library_name); ?>">
+      </div>
+      <h2 class="etran-header-tagline">
+        <?php echo __('We escalate discovery efficiency'); ?><br><?php echo __('and reading productivity.'); ?>
+      </h2>
+      <div class="etran-partners" aria-label="Partners">
+        <div class="etran-partner"><img src="<?php echo $img; ?>partners/blooming.svg" alt=""> Blooming</div>
+        <div class="etran-partner"><img src="<?php echo $img; ?>partners/buildright.svg" alt=""> BuildRight</div>
+        <div class="etran-partner"><img src="<?php echo $img; ?>partners/flowbot.svg" alt=""> Flowbot</div>
+        <div class="etran-partner"><img src="<?php echo $img; ?>partners/expor.svg" alt=""> Expor</div>
+        <div class="etran-partner"><img src="<?php echo $img; ?>partners/redo.svg" alt=""> Redo</div>
+      </div>
+    </section>
 
-<section class="etran-search" id="cari">
-  <div class="etran-search-inner etran-reveal">
-    <h2><?php echo __('Search the collection'); ?></h2>
-    <?php include __DIR__ . '/_search-form.php'; ?>
-  </div>
-</section>
+    <section class="etran-search" id="cari">
+      <h2><?php echo __('Search the collection'); ?></h2>
+      <?php include __DIR__ . '/_search-form.php'; ?>
+    </section>
 
-<section class="etran-section etran-stats" id="stats">
-  <div class="etran-section-inner">
-    <div class="etran-kicker"><?php echo __('Productivity'); ?></div>
-    <h2><?php echo __('Get More Done In A Week'); ?></h2>
-    <p class="etran-lead"><?php echo __('Maximize research productivity with smarter catalog tools designed to streamline discovery, stay organized, and automate routine library tasks.'); ?></p>
-    <div class="etran-stats-grid">
-      <article class="etran-stat-card etran-reveal">
-        <div class="etran-stat-visual"><i class="bi bi-graph-up-arrow"></i></div>
-        <div class="num">2x</div>
-        <span><?php echo __('Double Your Discovery'); ?></span>
-      </article>
-      <article class="etran-stat-card etran-reveal etran-reveal-delay-1">
-        <div class="etran-stat-visual"><i class="bi bi-bar-chart-fill"></i></div>
-        <div class="num">130%</div>
-        <span><?php echo __('More Activity'); ?></span>
-      </article>
-      <article class="etran-stat-card etran-reveal etran-reveal-delay-2">
-        <div class="etran-stat-visual"><i class="bi bi-arrow-left-right"></i></div>
-        <div class="num">∞</div>
-        <span><?php echo __('Centralize Your Library'); ?></span>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="etran-section" id="reliable">
-  <div class="etran-section-inner">
-    <div class="etran-kicker"><?php echo __('Platform'); ?></div>
-    <h2><?php echo __('The Most Reliable Catalog'); ?></h2>
-    <p class="etran-lead"><?php echo __('Effortless collection tracking and mobile convenience — get precise control at scale for loans, membership, and digital resources.'); ?></p>
-    <div class="etran-features-grid">
-      <article class="etran-feature-card etran-reveal">
-        <img src="<?php echo $img; ?>hero-person.jpg" alt="">
-        <div class="body">
-          <h3><?php echo __('Effortless Paper Tracking'); ?></h3>
-          <p><?php echo __('Keep bibliographic records, loans, and member history organized in one place.'); ?></p>
+    <section class="etran-section" id="stats">
+      <h2 class="etran-section-title"><?php echo __('Get more done in a week'); ?></h2>
+      <p class="etran-section-lead"><?php echo __('Maximize your productivity with smarter tools designed to streamline your workflow to automate tasks, stay organized'); ?></p>
+      <div class="etran-bento-wrap">
+        <div class="etran-bento-row">
+          <article class="etran-bento-card">
+            <p class="etran-bento-num">2x</p>
+            <span><?php echo __('Double Your Productivity'); ?></span>
+          </article>
+          <article class="etran-bento-card">
+            <img class="chart" src="<?php echo $img; ?>bento/chart.svg" alt="" width="142" height="98">
+            <span><?php echo __('Efficiency Increase Per Transfer'); ?></span>
+          </article>
         </div>
-      </article>
-      <article class="etran-feature-card etran-reveal etran-reveal-delay-1">
-        <img src="<?php echo $img; ?>productivity.jpg" alt="">
-        <div class="body">
-          <h3><?php echo __('Mobile Convenience'); ?></h3>
-          <p><?php echo __('Browse, search, and manage memberships from any device with a responsive OPAC.'); ?></p>
+        <div class="etran-bento-row">
+          <article class="etran-bento-card tall-center">
+            <img class="finance" src="<?php echo $img; ?>bento/finance.svg" alt="" width="124" height="112">
+            <span><?php echo __('Centralize Your Finances'); ?></span>
+          </article>
+          <article class="etran-bento-card">
+            <img class="percent" src="<?php echo $img; ?>bento/130.svg" alt="130%" width="199" height="68">
+            <span><?php echo __('More Activity'); ?></span>
+          </article>
         </div>
-      </article>
-      <article class="etran-feature-card etran-reveal etran-reveal-delay-2">
-        <img src="<?php echo $img; ?>cta-phone.jpg" alt="">
-        <div class="body">
-          <h3><?php echo __('Secure Access'); ?></h3>
-          <p><?php echo __('Member authentication and privilege controls protect personal and library data.'); ?></p>
+      </div>
+    </section>
+
+    <section class="etran-section" id="reliable">
+      <h2 class="etran-section-title"><?php echo __('The Most Reliable App'); ?></h2>
+      <div class="etran-features">
+        <article class="etran-feature">
+          <img src="<?php echo $img; ?>benefit-card.jpg" alt="">
+          <h3><?php echo __('Scale Your Team, Not Your Card Expenses'); ?></h3>
+          <p><?php echo __('Issue virtual and physical cards at no additional cost to support teams of any size.'); ?></p>
+        </article>
+        <article class="etran-feature">
+          <img src="<?php echo $img; ?>benefit-form.jpg" alt="">
+          <h3><?php echo __('Effortless Paper Tracking, Mobile Convenience'); ?></h3>
+          <p><?php echo __('Get precise control—at scale—with the ability to lock any card and restrict any type of spend.'); ?></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="etran-image-breaker">
+      <img src="<?php echo $img; ?>image-breaker.jpg" alt="">
+    </section>
+
+    <section class="etran-section" id="software">
+      <h2 class="etran-section-title"><?php echo __('First class software'); ?></h2>
+      <p class="etran-section-lead"><?php echo __('Get real-time insights, seamless transactions, and advanced tools to manage your wealth effortlessly.'); ?></p>
+      <div class="etran-soft-row">
+        <div class="etran-soft-item">
+          <img src="<?php echo $img; ?>icons/safe-storage.png" alt="">
+          <p><?php echo __('Safe Storage'); ?></p>
         </div>
-      </article>
+        <div class="etran-soft-item">
+          <img src="<?php echo $img; ?>icons/secure.png" alt="">
+          <p><?php echo __('Secure'); ?></p>
+        </div>
+        <div class="etran-soft-item">
+          <img src="<?php echo $img; ?>icons/earn-interest.png" alt="">
+          <p><?php echo __('Earn Interest'); ?></p>
+        </div>
+        <div class="etran-soft-item">
+          <img src="<?php echo $img; ?>icons/family-plans.png" alt="">
+          <p><?php echo __('Family Plans'); ?></p>
+        </div>
+      </div>
+    </section>
+
+    <div id="slims-home" class="etran-section etran-collections">
+      <?php if ($sysconf['template']['classic_popular_collection'] ?? 1): ?>
+        <section class="mb-5">
+          <h2 class="etran-section-title" style="font-size:32px;"><?php echo __('Popular collections'); ?></h2>
+          <slims-group-subject url="index.php?p=api/subject/popular"></slims-group-subject>
+          <slims-collection url="index.php?p=api/biblio/popular"></slims-collection>
+        </section>
+      <?php endif; ?>
+      <?php if ($sysconf['template']['classic_new_collection'] ?? 1): ?>
+        <section>
+          <h2 class="etran-section-title" style="font-size:32px;"><?php echo __('New and updated'); ?></h2>
+          <slims-group-subject url="index.php?p=api/subject/latest"></slims-group-subject>
+          <slims-collection url="index.php?p=api/biblio/latest"></slims-collection>
+        </section>
+      <?php endif; ?>
     </div>
-  </div>
-</section>
 
-<section class="etran-section etran-software" id="software">
-  <div class="etran-section-inner">
-    <h2 class="etran-serif"><?php echo __('First Class Software'); ?></h2>
-    <p class="etran-lead"><?php echo __('Get real-time insights, seamless transactions, and advanced tools to manage your library effortlessly.'); ?></p>
-    <div class="etran-soft-grid">
-      <article class="etran-soft-card">
-        <div class="etran-soft-icon"><i class="bi bi-wallet2"></i></div>
-        <strong><?php echo __('Digital Archives'); ?></strong>
-      </article>
-      <article class="etran-soft-card">
-        <div class="etran-soft-icon"><i class="bi bi-fingerprint"></i></div>
-        <strong><?php echo __('Secure'); ?></strong>
-      </article>
-      <article class="etran-soft-card">
-        <div class="etran-soft-icon"><i class="bi bi-graph-up"></i></div>
-        <strong><?php echo __('Circulation Insights'); ?></strong>
-      </article>
-      <article class="etran-soft-card">
-        <div class="etran-soft-icon"><i class="bi bi-people"></i></div>
-        <strong><?php echo __('Family / Group Plans'); ?></strong>
-      </article>
-    </div>
-  </div>
-</section>
+    <section class="etran-cta-block" id="download">
+      <div class="etran-cta-card">
+        <img src="<?php echo $img; ?>cta-bg.jpg" alt="">
+        <div class="etran-cta-copy">
+          <h2><?php echo __('Open the catalog and manage everything from your phone.'); ?></h2>
+          <a class="etran-btn" href="#cari"><?php echo __('Get started'); ?></a>
+        </div>
+      </div>
+    </section>
 
-<div id="slims-home" class="etran-section etran-collections">
-  <div class="etran-section-inner">
-    <?php if ($sysconf['template']['classic_popular_collection'] ?? 1): ?>
-      <section class="mb-5">
-        <h2 style="font-size:1.75rem;"><?php echo __('Popular collections'); ?></h2>
-        <p class="etran-lead mb-4"><?php echo __('Our library\'s line of collection that have been favoured by our users.'); ?></p>
-        <slims-group-subject url="index.php?p=api/subject/popular"></slims-group-subject>
-        <slims-collection url="index.php?p=api/biblio/popular"></slims-collection>
-      </section>
-    <?php endif; ?>
-
-    <?php if ($sysconf['template']['classic_new_collection'] ?? 1): ?>
-      <section>
-        <h2 style="font-size:1.75rem;"><?php echo __('New and updated'); ?></h2>
-        <p class="etran-lead mb-4"><?php echo __('These are new collections list fresh from our processing oven.'); ?></p>
-        <slims-group-subject url="index.php?p=api/subject/latest"></slims-group-subject>
-        <slims-collection url="index.php?p=api/biblio/latest"></slims-collection>
-      </section>
-    <?php endif; ?>
+    <section class="etran-section" id="contact">
+      <h2 class="etran-section-title"><?php echo __('Contact'); ?></h2>
+      <p class="etran-section-lead" style="max-width:520px;">
+        <?php echo strip_tags($sysconf['template']['classic_map_desc'] ?? $library_sub); ?>
+      </p>
+      <?php if (!empty($sysconf['template']['classic_map_link'])): ?>
+        <div class="mt-4" style="border-radius:10px; overflow:hidden; height:320px;">
+          <iframe src="<?php echo $sysconf['template']['classic_map_link']; ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      <?php endif; ?>
+    </section>
   </div>
 </div>
-
-<section class="etran-cta" id="download">
-  <div class="etran-cta-inner etran-reveal">
-    <h2><?php echo __('Open the catalog and manage everything from anywhere'); ?></h2>
-    <a class="etran-btn" href="#cari"><?php echo __('Get started'); ?></a>
-  </div>
-</section>
-
-<section class="etran-section" id="contact" style="background:#fff;">
-  <div class="etran-section-inner">
-    <h2><?php echo __('Contact'); ?></h2>
-    <p class="etran-lead">
-      <?php
-      echo $sysconf['template']['classic_map_desc']
-        ?? 'Library address and contact details can be configured from System → Theme → Customize.';
-      ?>
-    </p>
-    <?php if (!empty($sysconf['template']['classic_map_link'])): ?>
-      <div class="mt-4 rounded overflow-hidden" style="border-radius:18px; height:320px;">
-        <iframe src="<?php echo $sysconf['template']['classic_map_link']; ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>

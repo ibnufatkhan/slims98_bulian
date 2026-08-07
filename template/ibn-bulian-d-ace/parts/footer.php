@@ -1,45 +1,33 @@
 <?php
 /**
- * Footer — Ibn Bulian D'ACE (Etran)
+ * Footer — uiux Figma prototype (light #EDEDED)
  */
 $library_name = $sysconf['library_name'] ?? 'SLiMS Library';
+$img = CURRENT_TEMPLATE_DIR . 'assets/images/etran/';
 ?>
 <footer class="etran-footer" id="footer">
-  <div class="etran-footer-grid">
-    <div>
-      <a class="etran-brand" href="index.php" style="margin-bottom:1rem;">
-        <span class="etran-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 9h11"/><path d="M12 5l4 4-4 4"/><path d="M20 15H9"/><path d="M12 19l-4-4 4-4"/></svg>
-        </span>
-        <span><?php echo htmlspecialchars($library_name); ?></span>
-      </a>
-      <p style="margin:0.75rem 0 0; max-width:28ch; line-height:1.55;">
-        <?php echo strip_tags($sysconf['template']['classic_footer_about_us'] ?? 'SLiMS — Senayan Library Management System.'); ?>
-      </p>
-    </div>
+  <div class="etran-footer-left">
+    <img class="logo-mark" src="<?php echo $img; ?>footer-logo.svg" alt="">
+    <img class="wordmark" src="<?php echo $img; ?>footer-wordmark.svg" alt="<?php echo htmlspecialchars($library_name); ?>">
+  </div>
+  <div class="etran-footer-right">
     <div>
       <h4><?php echo __('Contact'); ?></h4>
-      <ul>
-        <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-        <li><a href="<?php echo $sysconf['template']['classic_instagram_link'] ?? '#'; ?>" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="<?php echo $sysconf['template']['classic_twitter_link'] ?? '#'; ?>" target="_blank" rel="noopener">X</a></li>
-        <li><a href="<?php echo $sysconf['template']['classic_youtube_link'] ?? '#'; ?>" target="_blank" rel="noopener">YouTube</a></li>
-      </ul>
+      <p>hello@example.com</p>
+      <a href="<?php echo $sysconf['template']['classic_instagram_link'] ?? '#'; ?>" target="_blank" rel="noopener">Instagram</a>
+      <a href="<?php echo $sysconf['template']['classic_twitter_link'] ?? '#'; ?>" target="_blank" rel="noopener">X</a>
+      <a href="<?php echo $sysconf['template']['classic_youtube_link'] ?? '#'; ?>" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <div>
-      <h4><?php echo __('Legal'); ?></h4>
-      <ul>
-        <li><a href="index.php?p=visitor"><?php echo __('Visitor'); ?></a></li>
-        <li><a href="index.php?p=member"><?php echo __('Member Area'); ?></a></li>
-        <li><a href="index.php?p=news"><?php echo __('News'); ?></a></li>
-      </ul>
+    <div class="etran-footer-legal">
+      <a href="index.php?p=visitor"><?php echo __('Terms & Conditions'); ?></a>
+      <a href="index.php?p=member"><?php echo __('Privacy'); ?></a>
     </div>
-  </div>
-  <div class="etran-footer-bottom">
-    <div>&copy; <?php echo date('Y'); ?> <strong><?php echo htmlspecialchars($library_name); ?></strong> · Ibn Bulian D'ACE</div>
-    <div id="visitor-stats-slot"></div>
   </div>
 </footer>
+<div class="etran-footer-bottom">
+  <div>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($library_name); ?> · Ibn Bulian D'ACE</div>
+  <div id="visitor-stats-slot"></div>
+</div>
 
 <?php if ($sysconf['chat_system']['enabled'] && $sysconf['chat_system']['opac']) : ?>
     <div id="show-pchat2" style="position: fixed; bottom: 16px; right: 16px" class="shadow rounded">
@@ -48,7 +36,6 @@ $library_name = $sysconf['library_name'] ?? 'SLiMS Library';
 <?php endif; ?>
 
 <?php include LIB . "contents/chat.php"; ?>
-
 <?php include "_modal_topic.php"; ?>
 <?php include "_modal_advanced.php"; ?>
 <?php include "_modal_social_media.php"; ?>
@@ -69,15 +56,8 @@ $library_name = $sysconf['library_name'] ?? 'SLiMS Library';
 </script>
 <?php if ($sysconf['chat_system']['enabled'] && $sysconf['chat_system']['opac']) : ?>
     <script>
-        $('#show-pchat').click(() => {
-            $('.s-chat').hide()
-            $('#show-pchat2').show()
-        })
-        $('#show-pchat2').click(() => {
-            $('.s-chat').show(300, () => {
-                $('#show-pchat2').hide()
-            })
-        })
+        $('#show-pchat').click(() => { $('.s-chat').hide(); $('#show-pchat2').show(); })
+        $('#show-pchat2').click(() => { $('.s-chat').show(300, () => { $('#show-pchat2').hide(); }); })
     </script>
 <?php endif; ?>
 </body>
